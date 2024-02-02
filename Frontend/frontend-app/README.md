@@ -1,70 +1,45 @@
-# Getting Started with Create React App
+# Frontend 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project Structure
 
-## Available Scripts
+```
+frontend-app
+├── public
+│   ├── images
+│   └── index.html
+└── src
+    ├── components
+    │   ├── common
+    │   └── UI
+    │       ├── Button
+    │       ├── Card
+    │       ├── Footer
+    │       ├── Header
+    │       ├── Input
+    │       ├── List
+    │       ├── Modal
+    │       └── Panel
+    ├── pages
+    ├── routes
+    ├── services
+    ├── utils
+    ├── App.jsx
+    ├── index.css
+    └── index.js
+```
 
-In the project directory, you can run:
+- ***public*** คือ folder สำหรับเก็บ static content ต่าง ๆ ที่ใช้ภายใน application เช่น รูปภาพ
+    - **images/icons** เก็บ icons ต่าง ๆ ใน application
+    - **images/logos** เก็บ logo ของ application
+- ***src*** คือ folder สำหรับเก็บ source code ของ frontend ทั้งหมดซึ่งจะแบ่งเป็น sub folder ย่อย ๆ ได้ดังนี้
 
-### `npm start`
+  - **_components_** - เก็บ component ทั้งหมดที่ใช้ภายใน frontend application ซึ่งจะแบ่งออกเป็น 2 sub folder คือ
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    - **common** สำหรับเก็บ components ที่ใช้ร่วมกันเช่น Button, Error text
+    - **UI** สำหรับเก็บ component ซึ่งจะถูกแบ่งตามการใช้งาน เช่น Header, Footer, Panel etc.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  - **_pages_** - เก็บ component หลักที่เป็นโครงสร้างของแต่ละหน้าใน application เช่น Login.jsx ที่ทำหน้าที่ render หน้า Login
+  - **_routes_** - เก็บ Router component ที่ใช้สำหรับห่อหุ้ม page component ทำหน้าที่เช็คว่า current state สามารถ route ได้หรือไม่ได้ เช่น ProtectedRoutes.jsx ที่คอยเช็คว่าหาก user ยังไม่ได้ Authentication จะป้องกันไม่ให้เข้าถึง child component และ redirect ไปยัง Login page
+  - **_services_** - เก็บ function ต่าง ๆ ที่ใช้ในการติดต่อไปหา server หรือ Backend application เพื่อทำการดึงข้อมูล เช่น TaskService จะมี function สำหรับการติดต่อหา Backend เพื่อดึงข้อมูล Task ต่าง ๆ ของ user มาแสดงผล
+  - **_utils_** - เก็บ utility function ต่าง ๆ ที่ใช้ภายใน application เช่น _priorityEncode()_ ที่ทำหน้าที่ในการแปลงจาก priority ในรูปแบบ text ที่แสดงให้ user เห็นเป็นตัวเลขสำหรับบันทึกลง Database
+  - ***App.jsx*** - component หลักในการ render เป็น HTML เพื่อแสดงผล โดยจะมี react-router อยู่ภายใน component นี้เพื่อคอยควบคุมการแสดงผล และ route ไปยัง page ต่าง ๆ เพื่อ render อย่างถูกต้อง

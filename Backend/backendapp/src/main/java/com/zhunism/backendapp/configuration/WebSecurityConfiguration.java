@@ -42,6 +42,7 @@ public class WebSecurityConfiguration {
                 .sessionManagement(customizer -> customizer.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(requests ->
                     requests.requestMatchers(HttpMethod.POST,"/api/authentication","/api/register").permitAll()
+                            .requestMatchers("/swagger-ui/**","/v3/api-docs/**").permitAll()
                             .anyRequest().authenticated()
                 );
         return httpSecurity.build();

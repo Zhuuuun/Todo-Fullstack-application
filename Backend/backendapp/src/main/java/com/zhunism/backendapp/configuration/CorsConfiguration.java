@@ -19,5 +19,13 @@ public class CorsConfiguration implements WebMvcConfigurer {
                 .allowedHeaders("Authorization", "Content-Type", "Accept", "X-Requested-With", "Origin")
                 .exposedHeaders("Authorization")
                 .allowCredentials(true);
+
+        registry.addMapping("/swagger-ui/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
+
+        registry.addMapping("/v3/api-docs/**")
+                .allowedOrigins("*")
+                .allowedMethods("GET", "POST", "PUT", "DELETE");
     }
 }
