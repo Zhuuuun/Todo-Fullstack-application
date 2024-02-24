@@ -35,16 +35,18 @@ Todo application เป็น web applicatoin ที่จะมาช่วย�
 - Backend
   - Springboot 3 (+ Spring security)
   - Spring JPA
-  - MySQL
+  - PostgreSQL 
 
 ## Requirements
 
 1. Java version >= 17
 2. Node version >= 18
 3. มี Tools ที่ใช้ในการ host Database เช่น MySQL workbench หรือ docker สำหรับ run Database container
+4. **(Optional)** Docker เพื่อ simplify ขั้นตอนในการ setup
 
 ## How to execute project
 
+### Local setup
 1.  Initialize Database ซึ่งสามารถทำได้ทั้งแบบ 1.1 และ 1.2 ขึ้นอยู่กับ preference ของผู้ใช้
 
     1.1 Local Database โดยนำ app_db.sql ไปทำการ execute ใน RDMBS software เช่น MySQL เพื่อสร้างฐานข้อมูลสำหรับใช้ใน application
@@ -63,7 +65,7 @@ Todo application เป็น web applicatoin ที่จะมาช่วย�
     SQL_DATABASE="jdbc:mysql://localhost:3307/todo_db"
 
     # Username for access database must match with uesrname in database
-    SQL_USERNAME="root"
+    SQL_USERNAME="admin"
 
     # Password for access database (must match with password in database)
     SQL_PASSWORD="password"
@@ -86,8 +88,13 @@ Todo application เป็น web applicatoin ที่จะมาช่วย�
     npm start
 
     ```
-
-    > ในตอนนี้ยังติดปัญหาเรื่องการ containerize ตัว Backeกd จึงทำให้ยังไม่สารมารถ run แบบ container ได้ทั้ง application
+### Docker setup
+1. หลังจากที่ fork repository ไปแล้วให้ทำการเปิด terminal แล้ว cd เข้าไปยัง directory ของโปรเจคอยู่
+2. หลังจากนั้นให้ทำการ run คำสั่งดังต่อไปนี้เพื่อทำการ start application
+   ```
+   docker-compose up --build
+   ```
+   > note : สามารถ config environment variable ใน docker-compose.yaml ได้ตามที่ user ต้องการ 
 
 ## Application Mannual
 
