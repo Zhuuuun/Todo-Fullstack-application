@@ -8,7 +8,7 @@ import lombok.Setter;
 
 import java.time.LocalDate;
 
-@Table(name="tasks", schema = "todo_db")
+@Table(name="tasks")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

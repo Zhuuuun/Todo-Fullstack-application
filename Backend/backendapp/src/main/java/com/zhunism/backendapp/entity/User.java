@@ -9,7 +9,7 @@ import lombok.Setter;
 @Entity
 @Data
 @NoArgsConstructor
-@Table(name="users", schema="todo_db")
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

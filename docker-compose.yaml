@@ -1,0 +1,39 @@
+version: "3"
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: todo_db
+    restart: on-failure
+    volumes:
+      - "./Database/app_db.sql:/docker-entrypoint-initdb.d/app_db.sql"
+
+  backend:
+    depends_on:
+      - db
+    image: zhunism/todo_app_backend:v1.0
+    restart: on-failure
+    ports:
+      - "8081:8081"
+    environment:
+      SERVER_PORT: 8081
+      SPRING_SECURITY_USER_NAME: admin
+      SPRING_SECURITY_USER_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/todo_db
+      SPRING_DATASOURCE_USERNAME: admin
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.PostgreSQLDialect
+
+  frontend:
+    depends_on:
+      - backend
+    image: zhunism/todo_app_frontend:v1.0
+    restart: on-failure
+    ports:
+      - "3000:3000"
+    environment:
+      API_URL: http://localhost:8081/api
+    
