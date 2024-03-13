@@ -34,6 +34,6 @@ backendapp
 - ***src/main/resource*** - เก็บ static content หรือ resource ต่าง ๆ เช่น database port, username และ password สำหรับ MySQL Database รวมไปถึง environment variable 
 
 ## API Specification
-หลังจากที่ application เริ่มทำงานสามารถเข้าไปดู API Specification ผ่าน swagger-ui ได้โดยเข้าไปที่ ```http://localhost:8080/swagger-ui/index.html```
+หลังจากที่ application เริ่มทำงานสามารถเข้าไปดู API Specification ผ่าน swagger-ui ได้โดยเข้าไปที่ ```http://localhost:8081/swagger-ui/index.html```
 
 
