@@ -4,6 +4,7 @@ import com.zhunism.backendapp.authentication.dto.request.SignupRequestDTO;
 import com.zhunism.backendapp.authentication.dto.response.UserResponseDTO;
 import com.zhunism.backendapp.authentication.entity.User;
 import com.zhunism.backendapp.authentication.service.AuthService;
+import com.zhunism.backendapp.authentication.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,13 @@ import java.util.List;
 @RequestMapping("/api")
 public class SignupUserController {
 
-    @Autowired
-    private AuthService authService;
+    private final AuthService authService;
+    private final UserService userService;
+
+    public SignupUserController(AuthService authService, UserService userService) {
+        this.authService = authService;
+        this.userService = userService;
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> createUser(@RequestBody @Valid SignupRequestDTO signupRequestDTO)  {
@@ -29,6 +35,6 @@ public class SignupUserController {
 
     @GetMapping("/users")
     public List<User> findAll() {
-        return authService.findAll();
+        return userService.findAll();
     }
 }

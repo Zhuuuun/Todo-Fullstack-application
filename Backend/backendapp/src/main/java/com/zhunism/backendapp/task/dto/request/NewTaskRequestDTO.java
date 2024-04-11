@@ -2,11 +2,15 @@ package com.zhunism.backendapp.task.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.validation.constraints.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewTaskRequestDTO {
     @NotBlank(message = "Username is mandatory")
     String userName;

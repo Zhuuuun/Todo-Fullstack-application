@@ -11,7 +11,7 @@ services:
   backend:
     depends_on:
       - db
-    image: zhunism/todo_app_backend:v1.1
+    image: zhunism/todo_app_backend:v1.2
     restart: on-failure
     ports:
       - "8081:8081"

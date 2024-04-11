@@ -8,34 +8,30 @@ import com.zhunism.backendapp.authentication.entity.User;
 import com.zhunism.backendapp.authentication.exception.DuplicatedUserException;
 import com.zhunism.backendapp.authentication.repository.UserRepository;
 import com.zhunism.backendapp.authentication.service.AuthService;
-import com.zhunism.backendapp.authentication.service.jwt.UserDetailsServiceImpl;
 import com.zhunism.backendapp.authentication.util.JwtUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 
 @Service
 public class AuthServiceImpl implements AuthService {
+    private final UserRepository userRepository;
+    private final UserDetailsService userDetailsService;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
 
-    @Autowired
-    UserRepository userRepository;
-
-    @Autowired
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    public AuthServiceImpl(UserRepository userRepository, UserDetailsService userDetailsService, JwtUtil jwtUtil, AuthenticationManager authenticationManager) {
+        this.userRepository = userRepository;
+        this.userDetailsService = userDetailsService;
+        this.jwtUtil = jwtUtil;
+        this.authenticationManager = authenticationManager;
+    }
 
     @Override
     public UserResponseDTO createUser(SignupRequestDTO signupRequestDTO) {
@@ -58,11 +54,6 @@ public class AuthServiceImpl implements AuthService {
         userResponseDTO.setUserName(createdUser.getUserName());
 
         return userResponseDTO;
-    }
-
-    @Override
-    public List<User> findAll() {
-        return userRepository.findAll();
     }
 
     @Override

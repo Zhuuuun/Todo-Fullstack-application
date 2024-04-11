@@ -12,8 +12,6 @@ import java.util.List;
 public interface AuthService {
     UserResponseDTO createUser(SignupRequestDTO signupRequestDTO) throws DuplicatedUserException;
 
-    List<User> findAll();
-
     AuthenticationResponseDTO generatedTokenWithUser(AuthenticationRequestDTO authenticationRequestDTO);
 
 
