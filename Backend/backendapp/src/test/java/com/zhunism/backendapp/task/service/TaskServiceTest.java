@@ -79,6 +79,7 @@ public class TaskServiceTest {
         newTaskRequestDTO.setTitle(TITLE);
         newTaskRequestDTO.setDueDate(LocalDate.now().minusDays(1));
 
+        verify(taskRepository,never()).save(Mockito.any(Task.class));
         assertThrows(InvalidOperationException.class, () -> taskService.createTask(newTaskRequestDTO));
     }
 
@@ -123,6 +124,7 @@ public class TaskServiceTest {
         task.setStatus(MAX_STATUS);
         when(taskRepository.findById(TASK_ID)).thenReturn(Optional.of(task));
 
+        verify(taskRepository,never()).save(Mockito.any(Task.class));
         assertThrows(InvalidOperationException.class, () -> taskService.increaseStatus(TASK_ID));
     }
 

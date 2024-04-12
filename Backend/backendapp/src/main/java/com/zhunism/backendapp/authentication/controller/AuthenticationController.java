@@ -18,9 +18,11 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api")
 public class AuthenticationController {
+    private final AuthService authService;
 
-    @Autowired
-    private AuthService authService;
+    public AuthenticationController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @PostMapping("/authentication")
     public ResponseEntity<?> createAuthenticationToken(@RequestBody AuthenticationRequestDTO authenticationRequestDTO, HttpServletResponse response) throws IOException {
